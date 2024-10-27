@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Create Service Request{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2>Create Service Request</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="service_id">Service</label>
+                <select class="form-control" id="service_id" name="service_id" required>
+                    {% for service in services %}
+                    <option value="{{ service.id }}">{{ service.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date_of_request">Date of Request</label>
+                <input type="date" class="form-control" id="date_of_request" name="date_of_request" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

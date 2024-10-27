@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}View Service Requests{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>View Service Requests</h2>
+        <a href="{{ url_for('service_requests.create_request') }}" class="btn btn-primary mb-3">Create New Request</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Service</th>
+                    <th>Date of Request</th>
+                    <th>Date of Completion</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in requests %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.service.name }}</td>
+                    <td>{{ request.date_of_request }}</td>
+                    <td>{{ request.date_of_completion }}</td>
+                    <td>{{ request.service_status }}</td>
+                    <td>{{ request.remarks }}</td>
+                    <td>
+                        {% if request.service_status == 'requested' %}
+                        <a href="{{ url_for('service_requests.edit_request', id=request.id) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ url_for('service_requests.close_request', id=request.id) }}" class="btn btn-success">Close</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

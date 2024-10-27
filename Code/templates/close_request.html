@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Close Service Request{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Close Service Request</h2>
+        <p>Service request closed successfully.</p>
+        <a href="{{ url_for('professional_actions.view_requests') }}" class="btn btn-primary">Back to Requests</a>
+    </div>
+</div>
+{% endblock %}

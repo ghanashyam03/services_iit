@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Professional Dashboard{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Professional Dashboard</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Service</th>
+                   
+                    <th>Date of Request</th>
+                    <th>Date of Completion</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in requests %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.service.name }}</td>
+                    <td>{{ request.date_of_request }}</td>
+                    <td>{{ request.date_of_completion }}</td>
+                    <td>{{ request.service_status }}</td>
+                    <td>
+                        {% if request.service_status == 'requested' %}
+                        <a href="{{ url_for('professional_actions.accept_request', id=request.id) }}" class="btn btn-success">Accept</a>
+                        <a href="{{ url_for('professional_actions.reject_request', id=request.id) }}" class="btn btn-danger">Reject</a>
+                        {% elif request.service_status == 'under process' %}
+                        <a href="{{ url_for('professional_actions.finish_request', id=request.id) }}" class="btn btn-primary">Finish</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

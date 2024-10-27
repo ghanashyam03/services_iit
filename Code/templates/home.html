@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to Home Services</h1>
+    <p class="lead">Your one-stop solution for all home services.</p>
+    <hr class="my-4">
+    <p>Login or register to get started.</p>
+    <a class="btn btn-primary btn-lg mx-2" href="{{ url_for('auth.login') }}" role="button">Login</a>
+    <a class="btn btn-secondary btn-lg mx-2" href="{{ url_for('auth.register') }}" role="button">Register</a>
+</div>
+
+
+{% endblock %}

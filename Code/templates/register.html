@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2>Register</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="user_type">User Type</label>
+                <select class="form-control" id="user_type" name="user_type" required>
+                    <option value="customer">Customer</option>
+                    <option value="professional">Service Professional</option>
+                </select>
+            </div>
+            <div id="professional_fields" style="display: none;">
+                <div class="form-group">
+                    <label for="service_type">Service Type</label>
+                    <input type="text" class="form-control" id="service_type" name="service_type">
+                </div>
+                <div class="form-group">
+                    <label for="experience">Experience (years)</label>
+                    <input type="number" class="form-control" id="experience" name="experience">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('user_type').addEventListener('change', function() {
+        var professionalFields = document.getElementById('professional_fields');
+        if (this.value === 'professional') {
+            professionalFields.style.display = 'block';
+        } else {
+            professionalFields.style.display = 'none';
+        }
+    });
+</script>
+{% endblock %}

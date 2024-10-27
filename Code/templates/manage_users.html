@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Manage Users{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Manage Users</h2>
+        <h3>Service Professionals</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Service Type</th>
+                    <th>Experience</th>
+                    <th>Approved</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for professional in professionals %}
+                <tr>
+                    <td>{{ professional.id }}</td>
+                    <td>{{ professional.name }}</td>
+                    <td>{{ professional.email }}</td>
+                    <td>{{ professional.service_type }}</td>
+                    <td>{{ professional.experience }}</td>
+                    <td>{{ professional.is_approved }}</td>
+                    <td>
+                        {% if not professional.is_approved %}
+                        <a href="{{ url_for('admin.approve_professional', id=professional.id) }}" class="btn btn-success">Approve</a>
+                        {% endif %}
+                        <a href="{{ url_for('admin.block_user', user_type='professional', id=professional.id) }}" class="btn btn-danger">Block</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3>Customers</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>
+                        <a href="{{ url_for('admin.block_user', user_type='customer', id=customer.id) }}" class="btn btn-danger">Block</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
