@@ -27,7 +27,11 @@
             <div id="professional_fields" style="display: none;">
                 <div class="form-group">
                     <label for="service_type">Service Type</label>
-                    <input type="text" class="form-control" id="service_type" name="service_type">
+                    <select class="form-control" id="service_type" name="service_type">
+                        {% for service in services %}
+                            <option value="{{ service.id }}">{{ service.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="experience">Experience (years)</label>

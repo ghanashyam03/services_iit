@@ -38,3 +38,11 @@ class ServiceRequest(db.Model):
     date_of_completion = db.Column(db.DateTime, nullable=True)
     service_status = db.Column(db.String(50), nullable=False, default='requested')
     remarks = db.Column(db.String(500), nullable=True)
+    professional = db.relationship('ServiceProfessional', backref='requests')
+    rejected_requests = db.relationship('RejectedRequest', backref='service_request', lazy=True)
+
+class RejectedRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    service_request_id = db.Column(db.Integer, db.ForeignKey('service_request.id', ondelete='CASCADE'), nullable=False)
+    professional_id = db.Column(db.Integer, db.ForeignKey('service_professional.id', ondelete='CASCADE'), nullable=False)
+    db.UniqueConstraint('service_request_id', 'professional_id', name='unique_rejection')

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from Code.extensions import db
-from Code.models import Admin, ServiceProfessional, Customer
+from Code.models import Admin, ServiceProfessional, Customer, Service
 
 auth = Blueprint('auth', __name__)
 
@@ -46,6 +46,7 @@ def logout():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
+    services = Service.query.all()
     if request.method == 'POST':
         name = request.form.get('name')
         email = request.form.get('email')
@@ -66,4 +67,4 @@ def register():
         
         return redirect(url_for('auth.login'))
     
-    return render_template('register.html')
+    return render_template('register.html', services=services)

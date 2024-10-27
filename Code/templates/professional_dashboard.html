@@ -9,7 +9,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Service</th>
-                   
                     <th>Date of Request</th>
                     <th>Date of Completion</th>
                     <th>Status</th>
@@ -28,7 +27,7 @@
                         {% if request.service_status == 'requested' %}
                         <a href="{{ url_for('professional_actions.accept_request', id=request.id) }}" class="btn btn-success">Accept</a>
                         <a href="{{ url_for('professional_actions.reject_request', id=request.id) }}" class="btn btn-danger">Reject</a>
-                        {% elif request.service_status == 'under process' %}
+                        {% elif request.service_status == 'under process' and request.professional_id == session['user_id'] %}
                         <a href="{{ url_for('professional_actions.finish_request', id=request.id) }}" class="btn btn-primary">Finish</a>
                         {% endif %}
                     </td>

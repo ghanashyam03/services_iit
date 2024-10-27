@@ -49,7 +49,7 @@ def close_request(id):
     if session.get('user_type') != 'customer':
         return redirect(url_for('auth.login'))
     service_request = ServiceRequest.query.get(id)
-    service_request.service_status = 'closed'
+    db.session.delete(service_request)
     db.session.commit()
     return redirect(url_for('service_requests.view_requests'))
 
@@ -57,9 +57,8 @@ def close_request(id):
 def view_requests():
     if session.get('user_type') != 'customer':
         return redirect(url_for('auth.login'))
+    
     customer_id = session.get('user_id')
     requests = ServiceRequest.query.filter_by(customer_id=customer_id).all()
-    print(requests)
-    for request in requests:
-        print(request.service.name)
+    
     return render_template('view_requests.html', requests=requests)

@@ -14,6 +14,7 @@
                     <th>Date of Completion</th>
                     <th>Status</th>
                     <th>Remarks</th>
+                    <th>Professianal Name</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -26,12 +27,14 @@
                     <td>{{ request.date_of_completion }}</td>
                     <td>{{ request.service_status }}</td>
                     <td>{{ request.remarks }}</td>
+                    <td>{{ request.professional.name if request.professional else 'N/A' }}</td>
                     <td>
                         {% if request.service_status == 'requested' %}
                         <a href="{{ url_for('service_requests.edit_request', id=request.id) }}" class="btn btn-warning">Edit</a>
                         <a href="{{ url_for('service_requests.close_request', id=request.id) }}" class="btn btn-success">Close</a>
                         {% endif %}
                     </td>
+
                 </tr>
                 {% endfor %}
             </tbody>
